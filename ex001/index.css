@@ -1,0 +1,10 @@
+body{
+    font: normal 15pt Arial;
+}
+
+div{
+    /* coloca cor na area da div  */
+    background-color: rgb(154, 213, 231);
+    /* coloca uma borda pontilhada em volta da area da div  */
+    border: 1px dashed black;
+}

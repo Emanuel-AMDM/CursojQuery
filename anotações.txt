@@ -1,0 +1,245 @@
+JQUERY É UMA BIBLIOTECA, TEM QUE TRAZER A BIBLIOTECA SEMPRE NO SCRIPT, USE DOIS SCRIPTS, UM PRA TRAZER OUTRO PRA FAZER AS FUNTIONS:
+//BIBLIOTECA:
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+//SCRIPT:
+<script src="index.js"></script>
+
+
+PEGANDO VALORES COM JQUERY:
+
+pela tag:
+var variavel1 = $("h1");
+var variavel2 = $("p");
+
+essa busca pela tag ele vai pegar todas as tags que existem ou seja, na hora de imprimir ou usar algum valor você precisa dizer qual é:
+//pega a tag que esta na primeira posição, esses são dois metodos para pegar a posição:
+var primeiraVariavel = variavel1.get(0);
+var segundaVariavel = variavel2[0];
+
+pela class:
+var varivel = $(".nomedaclass");
+
+pelo id:
+var variavel = $("#iddocampo");
+
+METODOS:
+
+$().ready: Ele é um metodo que executa uma função quando o DOM está pronto/carregando, ou seja quando a pagina carregar.
+//quando o documento estiver carregado ele vai rodar a função
+$(document).ready(function(){
+    console.log("Começando!");
+});
+
+tambem pode ser escrito sem o document:
+$().ready(function(){
+    console.log("Começando!");
+});
+
+ou
+
+$(function(){
+    console.log("Começando!");
+});
+
+$().ready !== onload, pq?
+Porque o ready ele aguarda a pagina carregar, o onload ele espera por alguma coisa carregar, como body, img, header, onde tiver o onload
+
+CRIANDO ELEMENTOS:
+
+criando de uma string:
+var paragrafo = $("<p>Ola Mundo</p>");
+
+criando de um objeto:
+var elemento = document.createElement("div");
+var elementoJquery = $(elemento);
+
+ou
+
+var novoElemento = $(document.createElement("p"));
+
+ADICIONANDO ELEMENTOS:
+metodos que nos permitem inserir conteudo dentro de um elemento existente:
+
+//insere(anexa) dentro do h1 um p com essas informações dentro "1111111"
+$("h1").append("<p>1111111</p>");
+
+//faz o mesmo que o de cima mas ao contrario, coloque(anexe) esse p dentro de um h1
+$("<p>222222</p>").appendTo("h1");
+
+criando elemento com JS e fazendo append ou appendTo com JQUERY:
+
+//criando o p
+var elemento = document.createElement("p");
+//coloco ola em forma de texto no final
+elemento.textContent = "Ola";
+//coloco o elemento no final do h1
+$("h1").append(elemento);
+//coloco um p no final de um p que é o que tem dentro do elemento(variavel)
+$("<p>22222222</p>").appendTo(elemento);
+
+criando elemento com JS e fazendo prepend ou prependTo com JQUERY:
+metodos que nos permitem inserir conteudo no começo de um elemento existente:
+
+//criando o p
+var elemento = document.createElement("p");
+//coloco ola em forma de texto dentro 
+elemento.textContent = "Ola";
+//coloco o elemento no topo do h1
+$("h1").prepend(elemento);
+//coloco um p dentro de um p que é o que tem dentro do elemento(variavel), porem lá no começo
+$("<p>22222222</p>").prependTo(elemento);
+
+LER E ADITAR CONTEÚDO:
+
+$("").html();:
+//isso aqui vai me retornar todo o conteudo html que tem nessa div
+$("div").html();  -------------->>>>>>como de lei, trouxe pela tag entao ele vai trazer só da primeira div
+
+caso queira tirar os elementos de dentro dessa div como no exemplo a cima, voce pode trocar com JQUERY:
+//isso aqui vai trocar tudo que tem nessa div para o paragrafo criado dentro do html
+//vai mudar ate as div que voce nao quer, por isso importante identificar qual é a div
+$("div").html("<p>teste</p>");
+
+ou
+
+$("div").html("teste");
+
+com identificador para trocar apenas o conteudo da primeira div:
+var variavel = $("div");
+var variavel = variavel[0];
+$(variavel).html("<p>teste</p>");
+
+$("").text();:
+//pega todo o conteudo de texto da tag, no exemplo to usando div mas pode ser qualuqer tag
+//assim como o de cima ele pega tudo, aconselho a usar o identificador, exemplo acima:
+$("div").text();
+
+//parecido com o de cima, mas ele vai substituir tudo que seja texto
+//esse nao cria tag, apenas string
+$("div").text(teste);
+
+MANIPULANDO CLASSES:
+
+$(elemento).addClass(classes);
+$(elemento).removeClass(classes);
+$(elemento).toggleClass(classes);
+
+exemplo:
+
+var h1 = $("h1");
+var p = $("p");
+
+//adiciona a classe vermelho ao cabeçalho
+h1.addClass("vermelho");
+//vai remover as classes azul e vermelho de todos os elementos em cabeçalhos
+p.removeClass("azul vermelho");
+//vai adicionar ou remover as 3 classes do cabeçalhos
+p.toggleClass("verde sublinhar negrito");
+
+MANIPULANDO CSS:
+
+//mostra o que tem no background-color da div
+$("div").css("background-color");
+
+//mostra o que tem nesses objetos dentro do vetor
+$("div").css(["background-color","border","width"]);
+
+//troca o objeto do css da div
+$("div").css("background-color","red");
+outro exemplo:
+//troca a altura do css da div
+$("div").css("height","200");
+
+EVENTOS COM JQUERY:
+
+$("button").click(function(){
+    console.log("botão clicado");
+});
+
+$("button").dblclick(function(){
+    console.log("click duplo");
+});
+
+$("button").hover(function(){
+    console.log("passou o mouse");
+});
+
+eventos mouse:
+click
+dblclick
+hover
+
+eventos navegador:
+scroll
+resize
+
+eventos teclado:
+keydown
+keypress
+keyup
+
+eventos form:
+focus
+blur
+change
+submit
+
+SHOW, HIDE, TOGGLE:
+
+//vai aparecer direto na tela
+$("div").show()
+//fazer o show aparecer no tempo em que você quiser contando por milesegundo
+//ele vem da esquerda crescendo ate ficar no tamanho original
+$(".modal").show(1000)
+
+//vai sumir direto da tela
+$("div").hide()
+//fazer o show esconder no tempo em que você quiser contando por milesegundo
+//ele vai sumindo pra esquerda ate nao ter mais nada
+$(".modal").show(1000)
+
+//vai alternar entre aparecer e sumir da tela
+$("div").toggle()
+//fazer o show alternar no tempo em que você quiser contando por milesegundo
+$(".modal").show(1000)
+
+SLIDE:
+
+//exibe o elemento com efeito de slide de cima para baixo
+$(".class").slideDown()
+
+//oculta o elemento com efeito inverso
+$(".class").slideUp()
+
+//Altera a visibilidade do elemento
+$(".class").slideToggle()
+
+//da pra passar por milesegundo igual o de cima
+
+FADE:
+
+//exibe o elemento saindo de tranparente para bruto
+$(".class").fadeIn()
+
+//oculta o elemento bruto para transparente
+$(".class").fadeOut()
+
+//alterna a visibilidade
+$(".class").fadeToggle()
+
+//controla a transparencia
+$(".class").fadeTo(500,0.5)
+
+ANIMATE:
+
+//define a altura animando, ou seja, da pra ver a altura mudando animadamente como sendo 100px
+$("div").animate({height:"100px"})
+
+//muda a altura, comprimento e margem
+//leva 2 segundos para fazer a transição
+$("div").animate({
+    height: "100px",
+    width: "200px",
+    margin: "10px
+},2000)
+
